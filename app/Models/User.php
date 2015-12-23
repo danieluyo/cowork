@@ -47,8 +47,8 @@ class User extends Authenticatable {
 	 */
 	protected $casts = [
 		'settings' => 'array',
-		'payment' => 'array',
-		'status' => 'boolean',
+		'payment'  => 'array',
+		'status'   => 'boolean',
 	];
 
 	/**
@@ -63,20 +63,6 @@ class User extends Authenticatable {
 	 * @var array
 	 */
 	protected $fillable = [
-		'name',
-		'email',
-		'password',
-	];
-
-
-
-
-	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
-	protected $hidden = [
 		'media_id',
 		'city_id',
 		'region_id',
@@ -107,35 +93,42 @@ class User extends Authenticatable {
 
 
 	/**
+	 * The attributes excluded from the model's JSON form.
+	 *
+	 * @var array
+	 */
+	protected $hidden = [ 'password', 'remember_token' ];
+
+	/**
 	 * Get the user's role all capitalized.
 	 *
-	 * @param  string  $value
+	 * @param  string $value
+	 *
 	 * @return string
 	 */
-	public function getRoleAttribute($value)
-	{
-		return strtoupper($value);
+	public function getRoleAttribute( $value ) {
+		return strtoupper( $value );
 	}
 
 	/**
 	 * Get the user's first name capitalized.
 	 *
-	 * @param  string  $value
+	 * @param  string $value
+	 *
 	 * @return string
 	 */
-	public function getFirstNameAttribute($value)
-	{
-		return ucfirst($value);
+	public function getFirstNameAttribute( $value ) {
+		return ucfirst( $value );
 	}
 
 	/**
 	 * Get the user's last name capitalized.
 	 *
-	 * @param  string  $value
+	 * @param  string $value
+	 *
 	 * @return string
 	 */
-	public function getLastNameAttribute($value)
-	{
-		return ucfirst($value);
+	public function getLastNameAttribute( $value ) {
+		return ucfirst( $value );
 	}
 }
