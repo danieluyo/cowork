@@ -22,11 +22,11 @@ Route::group(
 		Route::get( 'contact-us', [ 'uses' => 'FrontendController@contactUs', 'as' => 'contactUs' ] );
 		Route::post( 'contact-us', [ 'uses' => 'FrontendController@postContact', 'as' => 'contactUs.post' ] );
 
-		Route::get( 'auth/login', [ 'uses' => 'Auth\AuthController@getLogin', 'as' => 'login' ] );
-		Route::post( 'auth/login', [ 'uses' => 'Auth\AuthController@postLogin', 'as' => 'postLogin' ] );
-		Route::get( 'auth/logout', [ 'uses' => 'Auth\AuthController@getLogout', 'as' => 'logout' ] );
-		Route::get( 'auth/register', [ 'uses' => 'Auth\AuthController@getRegister', 'as' => 'register' ] );
-		Route::post( 'auth/register', [ 'uses' => 'Auth\AuthController@postRegister', 'as' => 'postRegister' ] );
+		Route::get( 'login', [ 'uses' => 'Auth\AuthController@getLogin', 'as' => 'login' ] );
+		Route::post( 'login', [ 'uses' => 'Auth\AuthController@postLogin', 'as' => 'postLogin' ] );
+		Route::get( 'logout', [ 'uses' => 'Auth\AuthController@getLogout', 'as' => 'logout' ] );
+		Route::get( 'register', [ 'uses' => 'Auth\AuthController@getRegister', 'as' => 'register' ] );
+		Route::post( 'register', [ 'uses' => 'Auth\AuthController@postRegister', 'as' => 'postRegister' ] );
 	}
 );
 
@@ -42,8 +42,8 @@ Route::group(
 */
 Route::group(
 	[
-		'prefix'     => 'dashboard',
-		'middleware' => [ 'web', 'auth' ],
+		'prefix' => 'dashboard',
+//		'middleware' => [ 'web', 'auth' ],
 	],
 	function() {
 		Route::get( '/', [ 'uses' => 'DashboardController@home', 'as' => 'dashboard.index' ] );
@@ -64,7 +64,7 @@ Route::group(
 		'as'     => 'ajax.',
 	],
 	function() {
-		Route::get( '/api/get-downloads/{appId}', 'AjaxController@getDownloads', [ 'as' => 'get-downloads' ] )->where( [ 'appId' => '[0-9]+' ] );
+		Route::get( '/api/{someId}', 'AjaxController@getDownloads', [ 'as' => 'get-downloads' ] )->where( [ 'someId' => '[0-9]+' ] );
 	}
 );
 
