@@ -9,10 +9,11 @@
 Route::group(
 	[
 //		'prefix'     => Localization::setLocale(),
-//		'middleware' => [
+		'middleware' => [
 //			'localization-session-redirect',
 //			'localization-redirect',
-//		],
+			'web',
+		],
 		'as' => 'frontend.',
 	],
 	function() {
