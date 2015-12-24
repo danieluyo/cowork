@@ -30,9 +30,17 @@ return [
     ],
 
     'stripe' => [
-        'model'  => App\User::class,
+        'model'  => App\Models\User::class,
         'key'    => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
+    ],
+
+    'facebook' => [
+        'url'  => 'https://facebook.com/optimatec1',
+    ],
+
+    'twitter' => [
+        'url'  => 'https://facebook.com/optimatec1',
     ],
 
 ];

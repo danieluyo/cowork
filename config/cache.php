@@ -2,6 +2,7 @@
 
 return [
 
+    'static_files_root' => env('STATIC_FILES_ROOT',''),
     /*
     |--------------------------------------------------------------------------
     | Default Cache Store
