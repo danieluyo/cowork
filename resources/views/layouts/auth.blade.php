@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{{config('cache.static_files_root')}}/global/vendor/slidepanel/slidePanel.css">
     <link rel="stylesheet" href="{{config('cache.static_files_root')}}/global/vendor/flag-icon-css/flag-icon.css">
     <link rel="stylesheet" href="{{config('cache.static_files_root')}}/global/vendor/waves/waves.css">
-    <link rel="stylesheet" href="{{config('cache.static_files_root')}}/assets/examples/css/pages/errors.css">
+    @yield('scripts-header')
     <!-- Fonts -->
     <link rel="stylesheet" href="{{config('cache.static_files_root')}}/global/fonts/material-design/material-design.min.css">
     <link rel="stylesheet" href="{{config('cache.static_files_root')}}/global/fonts/brand-icons/brand-icons.min.css">
@@ -35,29 +35,16 @@
         Breakpoints();
     </script>
 </head>
-<body class="page-error page-error-404 layout-full">
+<body class="@yield('body-class') layout-full">
 <!--[if lt IE 8]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 <!-- Page -->
 <div class="page animsition vertical-align text-center" data-animsition-in="fade-in"
-     data-animsition-out="fade-out">
+     data-animsition-out="fade-out">>
     <div class="page-content vertical-align-middle">
-
         @yield('content')
-
-        <footer class="page-copyright">
-            <p>WEBSITE BY <a href="{{ route('dashboard.index') }}">{{ trans('strings.app_name') }}</a></p>
-            <p>© {{ Date('Y') }}. All RIGHT RESERVED.</p>
-            <div class="social">
-                <a href="{{ config('services.twitter')['url'] }}">
-                    <i class="icon bd-twitter" aria-hidden="true"></i>
-                </a>
-                <a href="{{ config('services.facebook')['url'] }}">
-                    <i class="icon bd-facebook" aria-hidden="true"></i>
-                </a>
-            </div>
-        </footer>
+        @include('globals.footer_centered')
     </div>
 </div>
 <!-- End Page -->
@@ -75,6 +62,7 @@
 <script src="{{config('cache.static_files_root')}}/global/vendor/intro-js/intro.js"></script>
 <script src="{{config('cache.static_files_root')}}/global/vendor/screenfull/screenfull.js"></script>
 <script src="{{config('cache.static_files_root')}}/global/vendor/slidepanel/jquery-slidePanel.js"></script>
+<script src="{{config('cache.static_files_root')}}/global/vendor/jquery-placeholder/jquery.placeholder.js"></script>
 <!-- Scripts -->
 <script src="{{config('cache.static_files_root')}}/global/js/core.js"></script>
 <script src="{{config('cache.static_files_root')}}/assets/js/site.js"></script>
@@ -89,6 +77,8 @@
 <script src="{{config('cache.static_files_root')}}/global/js/components/slidepanel.js"></script>
 <script src="{{config('cache.static_files_root')}}/global/js/components/switchery.js"></script>
 <script src="{{config('cache.static_files_root')}}/global/js/components/tabs.js"></script>
+<script src="{{config('cache.static_files_root')}}/global/js/components/jquery-placeholder.js"></script>
+<script src="{{config('cache.static_files_root')}}/global/js/components/material.js"></script>
 <script>
     (function(document, window, $) {
         'use strict';
