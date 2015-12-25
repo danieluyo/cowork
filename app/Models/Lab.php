@@ -23,6 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Lab whereTranslation( $key, $value, $locale = null )
  */
 class Lab extends Model {
+
 	use Translatable;
 
 	/**
@@ -38,4 +39,13 @@ class Lab extends Model {
 	 * @var array
 	 */
 	protected $fillable = [ 'teacher_id', 'booking_id', 'price', 'status', 'title', 'description' ];
+
+
+	public function teacher() {
+		return $this->belongsTo( User::class, 'teacher_id' );
+	}
+
+	public function booking() {
+		return $this->belongsTo( Booking::class );
+	}
 }

@@ -48,7 +48,7 @@ class User extends Authenticatable {
 	protected $casts = [
 		'settings' => 'array',
 		'payment'  => 'array',
-		'status'   => 'boolean',
+//		'status'   => 'boolean',
 	];
 
 	/**
@@ -74,7 +74,6 @@ class User extends Authenticatable {
 		'username',
 		'email',
 		'password',
-		'remember_token',
 		'role',
 		'address',
 		'zip',
@@ -131,4 +130,38 @@ class User extends Authenticatable {
 	public function getLastNameAttribute( $value ) {
 		return ucfirst( $value );
 	}
+
+
+	/*
+	 * Relations
+	 * */
+
+	public function picture() {
+		return $this->belongsTo( Media::class );
+	}
+
+	public function city() {
+		return $this->belongsTo( City::class );
+	}
+
+	public function region() {
+		return $this->belongsTo( Region::class );
+	}
+
+	public function country() {
+		return $this->belongsTo( Country::class );
+	}
+
+	public function bookings() {
+		return $this->hasMany( Booking::class );
+	}
+
+	public function labs() {
+		return $this->hasMany( Lab::class, 'teacher_id' );
+	}
+
+	public function following() {
+		return $this->belongsToMany( User::class, 'following_id', 'follower_id' )->withTimestamps();
+	}
+
 }

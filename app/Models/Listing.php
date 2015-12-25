@@ -31,11 +31,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ListingTranslation[] $translations
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Listing translatedIn($locale = null)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Listing translatedIn( $locale = null )
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Listing translated()
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Listing listsTranslations($translationField)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Listing listsTranslations( $translationField )
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Listing withTranslation()
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Listing whereTranslation($key, $value, $locale = null)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Listing whereTranslation( $key, $value, $locale = null )
  */
 class Listing extends Model {
 
@@ -76,22 +76,32 @@ class Listing extends Model {
 	];
 
 
+	public function category() {
+		return $this->belongsTo( Category::class );
+	}
 
+	public function city() {
+		return $this->belongsTo( City::class );
+	}
 
+	public function region() {
+		return $this->belongsTo( Region::class );
+	}
 
+	public function country() {
+		return $this->belongsTo( Country::class );
+	}
 
+	public function bookings() {
+		return $this->hasMany( Booking::class );
+	}
 
+	public function media() {
+		return $this->belongsToMany( Media::class )->withTimestamps();
+	}
 
-
-
-
-
-
-
-
-
-
-
-
+	public function tags() {
+		return $this->belongsToMany( Tag::class )->withTimestamps();
+	}
 
 }

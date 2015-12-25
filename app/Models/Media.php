@@ -14,5 +14,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon $updated_at
  */
 class Media extends Model {
-	//
+
+	public function listings() {
+		return $this->belongsToMany( Listing::class )->withTimestamps();
+	}
 }

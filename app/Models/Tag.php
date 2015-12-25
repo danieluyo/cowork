@@ -35,4 +35,9 @@ class Tag extends Model {
 	 * @var array
 	 */
 	protected $fillable = [ 'type', 'title', 'description' ];
+
+
+	public function listings() {
+		return $this->belongsToMany( Listing::class )->withTimestamps();
+	}
 }

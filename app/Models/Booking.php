@@ -34,4 +34,15 @@ class Booking extends Model {
 	protected $fillable = [ 'user_id', 'listing_id', 'review', 'is_lab' ];
 
 
+	public function user() {
+		return $this->belongsTo( User::class );
+	}
+
+	public function listing() {
+		return $this->belongsTo( Listing::class );
+	}
+
+	public function labs() {
+		return $this->hasMany( Lab::class );
+	}
 }
