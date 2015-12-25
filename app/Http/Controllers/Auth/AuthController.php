@@ -31,6 +31,13 @@ class AuthController extends Controller
     protected $redirectTo = '/home';
 
     /**
+     * Where to redirect if user is successfully authenticated.
+     *
+     * @var string
+     */
+    protected $redirectPath = '/dashboard';
+
+    /**
      * Create a new authentication controller instance.
      *
      * @return void
