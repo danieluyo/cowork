@@ -1,5 +1,5 @@
 <link rel="apple-touch-icon" href="{{config('cache.static_files_root')}}/assets/images/apple-touch-icon.png">
-<link rel="shortcut icon" href="{{config('cache.static_files_root')}}/assets/images/favicon.ico">
+<link rel="shortcut icon" href="{{config('cache.static_files_root')}}/assets/images/favicon.png">
 <!-- Stylesheets -->
 <link rel="stylesheet" href="{{config('cache.static_files_root')}}/global/css/bootstrap.min.css">
 <link rel="stylesheet" href="{{config('cache.static_files_root')}}/global/css/bootstrap-extend.min.css">
