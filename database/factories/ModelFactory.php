@@ -51,7 +51,7 @@ $factory->define( App\Models\Listing::class, function( Faker\Generator $faker ) 
 		'category_id'          => rand( 1, 3 ),
 		'type'                 => rand( 1, 2 ),
 		'hourly_price'         => rand( 10, 30 ),
-		'daily_price'         => rand( 50, 100 ),
+		'daily_price'          => rand( 50, 100 ),
 		'monthly_price'        => rand( 200, 500 ),
 		'max_number_of_people' => rand( 1, 10 ),
 		'area'                 => rand( 20, 150 ),
