@@ -135,6 +135,10 @@ class User extends Authenticatable {
 	/*
 	 * Relations
 	 * */
+	
+	public function listings(){
+	    return $this->hasMany(Listing::class);
+	}
 
 	public function picture() {
 		return $this->belongsTo( Media::class );
