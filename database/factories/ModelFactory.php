@@ -42,7 +42,7 @@ $factory->define( App\Models\User::class, function( Faker\Generator $faker ) {
 } );
 
 
-$factory->define( App\Models\Listing::class, function( Faker\Generator $faker ) {
+$factory->define( App\Models\Space::class, function( Faker\Generator $faker ) {
 	return [
 		'user_id'              => rand( 1, 10 ),
 		'city_id'              => 564123,

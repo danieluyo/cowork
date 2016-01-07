@@ -6,7 +6,7 @@ use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Listing
+ * App\Models\Space
  *
  * @property integer $id
  * @property integer $user_id
@@ -30,14 +30,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property boolean $status
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ListingTranslation[] $translations
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Listing translatedIn( $locale = null )
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Listing translated()
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Listing listsTranslations( $translationField )
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Listing withTranslation()
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Listing whereTranslation( $key, $value, $locale = null )
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\SpaceTranslation[] $translations
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Space translatedIn( $locale = null )
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Space translated()
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Space listsTranslations( $translationField )
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Space withTranslation()
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Space whereTranslation( $key, $value, $locale = null )
  */
-class Listing extends Model {
+class Space extends Model {
 
 	use Translatable;
 

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property integer $id
  * @property integer $user_id
- * @property integer $listing_id
+ * @property integer $space_id
  * @property string $review
  * @property boolean $is_lab
  * @property \Carbon\Carbon $created_at
@@ -31,15 +31,15 @@ class Booking extends Model {
 	 *
 	 * @var array
 	 */
-	protected $fillable = [ 'user_id', 'listing_id', 'review', 'is_lab' ];
+	protected $fillable = [ 'user_id', 'space_id', 'review', 'is_lab' ];
 
 
 	public function user() {
 		return $this->belongsTo( User::class );
 	}
 
-	public function listing() {
-		return $this->belongsTo( Listing::class );
+	public function space() {
+		return $this->belongsTo( Space::class );
 	}
 
 	public function labs() {

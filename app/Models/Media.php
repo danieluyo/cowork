@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Media extends Model {
 
-	public function listings() {
-		return $this->belongsToMany( Listing::class )->withTimestamps();
+	public function spaces() {
+		return $this->belongsToMany( Space::class )->withTimestamps();
 	}
 }

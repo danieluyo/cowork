@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRegionTranslationsTable extends Migration
+class CreateContactUsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,12 @@ class CreateRegionTranslationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('region_translations', function (Blueprint $table) {
+        Schema::create('contact_us', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('locale', 8);
-            $table->unsignedInteger('region_id')->index();
             $table->string('name');
+            $table->string('email');
+            $table->text('content');
             $table->timestamps();
-            
-            $table->unique(['region_id','locale']);
-            $table->foreign('region_id')->references('id')->on('regions')->onDelete('cascade');
         });
     }
 
@@ -31,6 +28,6 @@ class CreateRegionTranslationsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('region_translations');
+        Schema::drop('contact_us');
     }
 }

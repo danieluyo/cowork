@@ -37,7 +37,7 @@ class Tag extends Model {
 	protected $fillable = [ 'type', 'title', 'description' ];
 
 
-	public function listings() {
-		return $this->belongsToMany( Listing::class )->withTimestamps();
+	public function spaces() {
+		return $this->belongsToMany( Space::class )->withTimestamps();
 	}
 }

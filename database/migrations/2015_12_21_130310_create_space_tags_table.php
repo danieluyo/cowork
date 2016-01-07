@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateContactsTable extends Migration
+class CreateSpaceTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,10 @@ class CreateContactsTable extends Migration
      */
     public function up()
     {
-        Schema::create('contacts', function (Blueprint $table) {
+        Schema::create('space_tags', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email');
-            $table->text('content');
+            $table->unsignedInteger('space_id')->index();
+            $table->unsignedInteger('tag_id')->index();
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateContactsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('contacts');
+        Schema::drop('space_tags');
     }
 }

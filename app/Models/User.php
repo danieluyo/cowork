@@ -135,9 +135,9 @@ class User extends Authenticatable {
 	/*
 	 * Relations
 	 * */
-	
-	public function listings(){
-	    return $this->hasMany(Listing::class);
+
+	public function spaces() {
+		return $this->hasMany( Space::class );
 	}
 
 	public function picture() {
@@ -165,7 +165,7 @@ class User extends Authenticatable {
 	}
 
 	public function following() {
-		return $this->belongsToMany( User::class, 'following_id', 'follower_id' )->withTimestamps();
+		return $this->belongsToMany( User::class, 'user_followings', 'following_id', 'follower_id' )->withTimestamps();
 	}
 
 }

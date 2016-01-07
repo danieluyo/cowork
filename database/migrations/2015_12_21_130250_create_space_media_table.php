@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateListingMediaTable extends Migration
+class CreateSpaceMediaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,9 @@ class CreateListingMediaTable extends Migration
      */
     public function up()
     {
-        Schema::create('listing_media', function (Blueprint $table) {
+        Schema::create('space_media', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('listing_id')->index();
+            $table->unsignedInteger('space_id')->index();
             $table->unsignedInteger('media_id')->index();
             $table->timestamps();
 
@@ -29,6 +29,6 @@ class CreateListingMediaTable extends Migration
      */
     public function down()
     {
-        Schema::drop('listing_media');
+        Schema::drop('space_media');
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * App\Models\WorkingHour
  *
  * @property integer $id
- * @property integer $listing_id
+ * @property integer $space_id
  * @property boolean $day
  * @property string $openings
  * @property string $closing
@@ -21,5 +21,5 @@ class WorkingHour extends Model {
 	 *
 	 * @var array
 	 */
-	protected $fillable = [ 'listing_id', 'day','openings','closings'];
+	protected $fillable = [ 'space_id', 'day','openings','closings'];
 }

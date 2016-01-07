@@ -5,21 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\ListingTranslation
+ * App\Models\SpaceTag
  *
  * @property integer $id
- * @property integer $listing_id
- * @property string $locale
- * @property string $title
- * @property string $description
+ * @property integer $space_id
+ * @property integer $tag_id
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  */
-class ListingTranslation extends Model {
+class SpaceTag extends Model {
 	/**
 	 * The attributes that are mass assignable.
 	 *
 	 * @var array
 	 */
-	protected $fillable = [ 'title', 'description' ];
+	protected $fillable = [ 'tag_id', 'space_id'];
 }

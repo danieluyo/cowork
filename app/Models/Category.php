@@ -38,8 +38,8 @@ class Category extends Model {
 	protected $fillable = [ 'parent_id', 'title', 'description' ];
 
 
-	public function listings() {
-		return $this->belongsToMany( Listing::class );
+	public function spaces() {
+		return $this->belongsToMany( Space::class );
 	}
 
 }

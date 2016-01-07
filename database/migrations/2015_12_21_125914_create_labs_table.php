@@ -16,7 +16,9 @@ class CreateLabsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger( 'teacher_id' )->index();
             $table->unsignedInteger( 'booking_id' )->index();
+            $table->unsignedInteger( 'media_id' )->index();
             $table->unsignedMediumInteger( 'price' );
+            $table->unsignedInteger('students_count');
             $table->boolean( 'status' )->default( '1' ); // approved
             $table->timestamps();
 

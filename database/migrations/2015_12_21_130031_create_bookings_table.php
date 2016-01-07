@@ -15,7 +15,7 @@ class CreateBookingsTable extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id')->index()->nullable();
-            $table->unsignedInteger('listing_id')->index();
+            $table->unsignedInteger('space_id')->index();
             $table->text('review');
             $table->boolean('is_lab')->default('0');
             $table->timestamps();

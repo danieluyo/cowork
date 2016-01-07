@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateListingTagsTable extends Migration
+class CreateAdminVenuesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,10 @@ class CreateListingTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('listing_tags', function (Blueprint $table) {
+        Schema::create('admin_venues', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('listing_id')->index();
-            $table->unsignedInteger('tag_id')->index();
+            $table->unsignedInteger('admin_id')->index();
+            $table->unsignedInteger('venue_id')->index();
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateListingTagsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('listing_tags');
+        Schema::drop('admin_venues');
     }
 }
