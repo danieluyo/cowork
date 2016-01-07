@@ -23,12 +23,11 @@ class CreateVenuesTable extends Migration
             $table->string( 'zip', 15 )->nullable();
             $table->decimal( 'latitude', 11, 8 )->nullable();
             $table->decimal( 'longitude', 11, 8 )->nullable();
-            $table->string('tax_rate')->nullable();
+            $table->unsignedTinyInteger('tax_rate')->nullable();
             $table->unsignedInteger( 'currency_id' )->index()->default('54'); //USD
             $table->string('number')->nullable();
             $table->string('email')->nullable();
             $table->string('website')->nullable();
-
             $table->timestamps();
         });
     }
