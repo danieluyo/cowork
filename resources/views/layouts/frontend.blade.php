@@ -16,7 +16,7 @@
 
     <title>@yield('title') | {{ trans('app.name') }}</title>
 
-    @include('frontend._partials.header_scripts')
+    @include('frontend._partials.head_scripts')
 
 </head>
 
