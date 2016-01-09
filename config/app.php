@@ -2,9 +2,6 @@
 
 return [
 
-	'name'        => 'Co.Work',
-	'description' => 'Co.Work Project description goes here',
-
 	/*
 	|--------------------------------------------------------------------------
 	| Application Environment
