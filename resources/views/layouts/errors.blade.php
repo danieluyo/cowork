@@ -2,8 +2,8 @@
 <html class="no-js css-menubar" lang="en">
 <head>
     @include('globals.head_meta')
-    <link rel="apple-touch-icon" href="{{config('cache.static_files_root')}}/assets/images/apple-touch-icon.png">
-    <link rel="shortcut icon" href="{{config('cache.static_files_root')}}/assets/images/favicon.ico">
+    <link rel="apple-touch-icon" href="{{config('cache.static_files_root')}}/assets/img/apple-touch-icon.png">
+    <link rel="shortcut icon" href="{{config('cache.static_files_root')}}/assets/img/favicon.ico">
     <!-- Stylesheets -->
     <link rel="stylesheet" href="{{config('cache.static_files_root')}}/global/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{config('cache.static_files_root')}}/global/css/bootstrap-extend.min.css">
