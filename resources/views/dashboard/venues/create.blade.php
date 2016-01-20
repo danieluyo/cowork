@@ -3,7 +3,7 @@
 @section('title','Add new Venue (Company)')
 {{--@section('page-description','This page will be filled very soon, for now use the FE version pls!')--}}
 
-@section('sidebar-title','sidebar title')
+@section('sidebar-title','Sidebar title')
 @section('sidebar-content','Content yooo')
 
 @section('content')
