@@ -46,7 +46,7 @@ class Space extends Model {
 	 *
 	 * @var array
 	 */
-	public $translatedAttributes = [ 'title', 'description' ];
+	public $translatedAttributes = [ 'title', 'description','equipments' ];
 
 	/**
 	 * The attributes that are mass assignable.
@@ -54,45 +54,29 @@ class Space extends Model {
 	 * @var array
 	 */
 	protected $fillable = [
+		'venue_id',
 		'category_id',
-		'city_id',
-		'region_id',
-		'country_id',
-		'type',
+		'booking_method',
+		'capacity',
 		'hourly_price',
 		'daily_price',
 		'monthly_price',
-		'max_number_of_people',
 		'area',
 		'ratings',
 		'impacts',
-		'address',
-		'zip',
-		'latitude',
-		'longitude',
 		'is_featured',
+		'status',
 		'title',
 		'description',
+		'equipments',
 	];
 
-	public function user(){
-	    return $this->belongsTo(User::class);
+	public function revenue(){
+	    return $this->belongsTo(Venue::class);
 	}
 
 	public function category() {
 		return $this->belongsTo( Category::class );
-	}
-
-	public function city() {
-		return $this->belongsTo( City::class );
-	}
-
-	public function region() {
-		return $this->belongsTo( Region::class );
-	}
-
-	public function country() {
-		return $this->belongsTo( Country::class );
 	}
 
 	public function bookings() {
