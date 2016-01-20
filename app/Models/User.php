@@ -40,6 +40,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable {
 
+	const ROLE_SUPER = 'SUPER';
+	const ROLE_ADMIN = 'ADMIN';
+	const ROLE_USER = 'USER';
+
+
 	/**
 	 * The attributes that should be casted to native types.
 	 *
@@ -136,12 +141,15 @@ class User extends Authenticatable {
 	 * Relations
 	 * */
 
-	public function spaces() {
-		return $this->hasMany( Space::class );
+	public function venues() {
+		return $this->belongsToMany( Venue::class, 'admin_venues', 'admin_id' );
 	}
 
-	public function picture() {
+	public function media() {
 		return $this->belongsTo( Media::class );
+	}
+	public function avatar(){
+	    return $this->media()->first()->filename;
 	}
 
 	public function city() {
