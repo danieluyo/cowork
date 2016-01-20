@@ -12,7 +12,7 @@ return [
     |
     */
 
-    'app_name' => 'Co.Work',
-    'app_desc' => 'Co.Work Project Description goes here',
+    'app_name' => 'CoWork Box',
+    'app_desc' => 'CoWork Box Project Description goes here',
 
 ];
