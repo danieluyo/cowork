@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Models\Contact;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller {
 
 	public function home() {
 		return view( 'frontend.pages.home' );
+	}
+
+	public function profile(User $user){
+		return $user;
 	}
 
 	public function aboutUs() {
