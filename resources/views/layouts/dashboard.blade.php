@@ -10,33 +10,44 @@
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
 <![endif]-->
+
+@include('dashboard._partials.top.toolbar')
 @include('dashboard._partials.left.menu_bar')
 
         <!-- Content -->
-<div class="page animsition" style="/*background:#F3F4F5;*/height:100%;">
-    {{--<div class="page-content">--}}
-    <div class="col-lg-8 col-md-10 padding-top-70" style="background:white;">
-        {{--@include('dashboard._partials.top.toolbar')--}}
-        <div class="page-header">
-            <h1 class="page-title">@yield('title')</h1>
-            <p class="page-description">
-                @yield('page-description')
-            </p>
+<div class="page animsition" style="background: #e7e7e7;">
+
+    <div class="row">
+        <div class="col-md-6" style="background: #fff;width:620px;float:left;">
+            <div class="page-header">
+                <h1 class="page-title">@yield('title')</h1>
+            </div>
+            <div class="panel-heading">
+                <h3 class="panel-title">@yield('page-description')</h3>
+            </div>
+            <div class="panel-body">
+                @yield('content')
+            </div>
         </div>
-        @yield('content')
-    </div>
-    <div class="col-lg-4 col-md-2 padding-top-70">
-        <div class="page-header">
-            <h6 class="page-title">@yield('sidebar-title')</h6>
-            <p class="page-description">
-                @yield('sidebar-description')
-            </p>
-        </div>
-        @yield('sidebar-content')
-    </div>
 
 
-    {{--</div>--}}
+        <div style="background: #e7e7e7;height:100%;overflow: auto;">
+            <div class="page-header">
+                <h4 class="page-title">@yield('sidebar-title')</h4>
+            </div>
+            <div class="panel-body">
+                @yield('sidebar-content')
+            </div>
+
+            {{--<section class="page-aside-section">--}}
+                {{--<h5 class="page-aside-title"></h5>--}}
+                {{--<div class="list-group">--}}
+
+                {{--</div>--}}
+            {{--</section>--}}
+        </div>
+    </div>
+</div>
 </div>
 <!-- End Content -->
 
