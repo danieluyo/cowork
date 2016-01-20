@@ -1,5 +1,5 @@
-<link rel="apple-touch-icon" href="{{config('cache.static_files_root')}}/assets/images/apple-touch-icon.png">
-<link rel="shortcut icon" href="{{config('cache.static_files_root')}}/assets/images/favicon.png">
+<link rel="apple-touch-icon" href="{{config('cache.static_files_root')}}/assets/img/apple-touch-icon.png">
+<link rel="shortcut icon" href="{{config('cache.static_files_root')}}/assets/img/favicon.png">
 <!-- Stylesheets -->
 <link rel="stylesheet" href="{{config('cache.static_files_root')}}/global/css/bootstrap.min.css">
 <link rel="stylesheet" href="{{config('cache.static_files_root')}}/global/css/bootstrap-extend.min.css">
@@ -30,5 +30,5 @@
 <script>
     Breakpoints();
 </script>
-
-@yield('scripts-header')
+<link id="skinStyle" href="{{config('cache.static_files_root')}}/assets/skins/blue.css" rel="stylesheet" type="text/css">
+@yield('head')
