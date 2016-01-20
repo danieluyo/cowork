@@ -33,25 +33,24 @@
 <script src="{{config('cache.static_files_root')}}/global/js/components/slidepanel.js"></script>
 <script src="{{config('cache.static_files_root')}}/global/js/components/switchery.js"></script>
 <script src="{{config('cache.static_files_root')}}/global/js/components/tabs.js"></script>
+<script src="{{config('cache.static_files_root')}}/global/js/components/material.js"></script>
 <script>
     (function (document, window, $) {
         'use strict';
         var Site = window.Site;
         $(document).ready(function () {
             Site.run();
-
-            $('.tool-tip').tooltip({html: true});
-
-            function deleteItem(obj) {
-                if (confirm('Are you sure you want to delete this?')) {
-                    $(obj).parent().submit();
-                }
-                return false;
-            }
         });
     })(document, window, jQuery);
+
+    function deleteItem(obj) {
+        if (confirm('Are you sure you want to delete this item?')) {
+            $(obj).parent().submit();
+        }
+        return false;
+    }
 </script>
 
-@yield('scripts')
+@yield('footer')
 
 
