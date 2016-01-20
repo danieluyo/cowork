@@ -8,7 +8,7 @@
 @section('content')
 
     @if(auth()->user()->role == \App\Models\User::ROLE_ADMIN)
-    @section('sidebar-title','Tip')
+    @section('sidebar-content','Here where you can add new venues and mange it')
 
     <div class="container">
         <div class="col-md-6">
