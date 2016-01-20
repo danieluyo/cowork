@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Space;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class ListingController extends Controller
+class CategoryCitySpaceController extends Controller
 {
     /**
      * Display a listing of the resource.
