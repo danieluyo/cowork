@@ -13,14 +13,15 @@
 Route::group(
 	[
 		'prefix' => 'dashboard',
-//		'middleware' => [ 'web', 'auth' ],
+		'middleware' => [ 'web', 'auth' ],
 	],
 	function() {
 		Route::get( '/', [ 'uses' => 'DashboardController@home', 'as' => 'dashboard.index' ] );
 		Route::get( '/users', [ 'uses' => 'UserController@index', 'as' => 'dashboard.users' ] );
 
 		Route::resource('categories','CategoryController');
-		Route::resource('listings','Listing\ListingController');
+		Route::resource('venues','VenueController');
+		Route::resource('spaces','Space\SpaceController');
 	}
 );
 
@@ -70,19 +71,22 @@ Route::group(
 		Route::get( 'about-us', [ 'uses' => 'FrontendController@aboutUs', 'as' => 'aboutUs' ] );
 		Route::get( 'contact-us', [ 'uses' => 'FrontendController@contactUs', 'as' => 'contactUs' ] );
 		Route::post( 'contact-us', [ 'uses' => 'FrontendController@postContact', 'as' => 'contactUs.post' ] );
-
-
-		Route::get( '/coffices/{user}/category/{category}/{listing}', [ 'uses' => 'Listing\UserListingController@show' ] );
-		Route::get( '/coffices/{user}/category/{category}/', [ 'uses' => 'Listing\UserListingController@index' ] );
-		Route::get( '/coffices/{country}/category/{category}/', [ 'uses' => 'Listing\CountryCategoryListingController@index' ] );
-		Route::get( '/coffices/{country}/category/{category}/{listing}', [ 'uses' => 'Listing\CountryCategoryListingController@show' ] );
-
-//		Route::get( '/coffices/category/{category}/', [ 'uses' => 'Listing\CategoryListingController@index' ] );
-//		Route::get( '/coffices/category/{category}/{listing}', [ 'uses' => 'Listing\CategoryListingController@show' ] );
-
+		Route::get( '/users/{user}', [ 'uses' => 'FrontendController@profile' ] );
 		Route::auth();
+//no route for:
+// {category}/ ----
+//
+// Normal listing
+// {category}/{city}/
+// {category}/{city}/{listingID}
 
-		Route::get( '/{user}', [ 'uses' => 'FrontendController@profile' ] );
+// accessing venue page:
+// spaces/{venue_slug}/
+		Route::get('/spaces/{venue_slug}',[ 'uses' => 'Space\SpaceController@index' ]);
+		Route::get( '/{category}/{city}/', [ 'uses' => 'Space\CategoryCitySpaceController@index' ] );
+		Route::get( '/{category}/{city}/{space}', [ 'uses' => 'Space\CategoryCitySpaceController@show' ] );
+
+
 	}
 );
 
