@@ -41,6 +41,7 @@ class User extends Authenticatable {
 
 	const ROLE_SUPER = 'SUPER';
 	const ROLE_ADMIN = 'ADMIN';
+	const ROLE_TUTOR = 'TUTOR';
 	const ROLE_USER = 'USER';
 
 	/**
