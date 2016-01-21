@@ -67,7 +67,6 @@ class User extends Authenticatable {
 	 * @var array
 	 */
 	protected $fillable = [
-		'photo',
 		'city_id',
 		'region_id',
 		'country_id',
@@ -85,6 +84,7 @@ class User extends Authenticatable {
 		'longitude',
 		'phone',
 		'website',
+		'photo',
 		'facebook',
 		'settings',
 		'payment',
@@ -144,6 +144,10 @@ class User extends Authenticatable {
 		return $this->belongsToMany( Venue::class, 'admin_venues', 'admin_id' );
 	}
 
+	/**
+	 *  Wrapper around the property photo
+	 * @return string
+	 */
 	public function avatar() {
 		return $this->photo;
 	}
