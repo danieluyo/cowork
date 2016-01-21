@@ -15,7 +15,7 @@ class Venue extends Model {
 	protected $fillable = [
 		'name',
 		'category_id',
-		'image_id',
+		'photo',
 		'city',
 		'country',
 		'address',
@@ -36,14 +36,6 @@ class Venue extends Model {
 
 	public function spaces() {
 		return $this->hasMany( Space::class );
-	}
-
-	public function logo() {
-		return $this->media()->first()->filename;
-	}
-
-	public function media() {
-		return $this->belongsTo( Media::class, 'image_id' );
 	}
 
 	public function category() {

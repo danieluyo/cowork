@@ -16,7 +16,7 @@ class CreateVenuesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->unsignedInteger( 'category_id' )->index();
-            $table->unsignedInteger( 'image_id' )->index();// logo
+            $table->string( 'logo' )->nullable();
             $table->string( 'city' )->nullable();
             $table->string( 'country' )->nullable();
             $table->string( 'address' )->nullable();
