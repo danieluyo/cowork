@@ -12,7 +12,6 @@ class CreateUsersTable extends Migration {
 	public function up() {
 		Schema::create( 'users', function( Blueprint $table ) {
 			$table->increments( 'id' );
-			$table->unsignedInteger( 'media_id' )->index();
 			$table->unsignedInteger( 'city_id' )->index();
 			$table->unsignedInteger( 'region_id' )->index();
 			$table->unsignedInteger( 'country_id' )->index();
@@ -31,6 +30,7 @@ class CreateUsersTable extends Migration {
 			$table->decimal( 'longitude', 11, 8 )->nullable();
 			$table->string( 'phone', 30 )->nullable();
 			$table->string( 'website' )->nullable();
+			$table->string( 'photo' )->nullable();
 			$table->string( 'facebook' )->nullable();
 			$table->json( 'settings' );
 			$table->json( 'payment' );

@@ -9,14 +9,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * App\Models\User
  *
  * @property integer $id
- * @property integer $media_id
+ * @property string $photo
  * @property integer $city_id
  * @property integer $region_id
  * @property integer $country_id
  * @property string $first_name
  * @property string $last_name
  * @property string $about_me
- * @property integer $birdh_year
+ * @property integer $birth_year
  * @property string $username
  * @property string $email
  * @property string $password
@@ -44,7 +44,6 @@ class User extends Authenticatable {
 	const ROLE_ADMIN = 'ADMIN';
 	const ROLE_USER = 'USER';
 
-
 	/**
 	 * The attributes that should be casted to native types.
 	 *
@@ -68,7 +67,7 @@ class User extends Authenticatable {
 	 * @var array
 	 */
 	protected $fillable = [
-		'media_id',
+		'photo',
 		'city_id',
 		'region_id',
 		'country_id',
@@ -145,11 +144,8 @@ class User extends Authenticatable {
 		return $this->belongsToMany( Venue::class, 'admin_venues', 'admin_id' );
 	}
 
-	public function media() {
-		return $this->belongsTo( Media::class );
-	}
-	public function avatar(){
-	    return $this->media()->first()->filename;
+	public function avatar() {
+		return $this->photo;
 	}
 
 	public function city() {
