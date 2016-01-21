@@ -12,9 +12,6 @@ class CreateUsersTable extends Migration {
 	public function up() {
 		Schema::create( 'users', function( Blueprint $table ) {
 			$table->increments( 'id' );
-			$table->unsignedInteger( 'city_id' )->index();
-			$table->unsignedInteger( 'region_id' )->index();
-			$table->unsignedInteger( 'country_id' )->index();
 			$table->string( 'first_name', 30 )->nullable();
 			$table->string( 'last_name', 30 )->nullable();
 			$table->text( 'about_me' )->nullable();
@@ -24,6 +21,8 @@ class CreateUsersTable extends Migration {
 			$table->string( 'password', 60 );
 			$table->rememberToken();
 			$table->string( 'role' )->default( 'USER' );
+			$table->string( 'city' )->nullable();
+			$table->string( 'country' )->nullable();
 			$table->string( 'address' )->nullable();
 			$table->string( 'zip', 15 )->nullable();
 			$table->decimal( 'latitude', 11, 8 )->nullable();

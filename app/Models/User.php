@@ -9,10 +9,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * App\Models\User
  *
  * @property integer $id
- * @property string $photo
- * @property integer $city_id
- * @property integer $region_id
- * @property integer $country_id
  * @property string $first_name
  * @property string $last_name
  * @property string $about_me
@@ -22,12 +18,15 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $password
  * @property string $remember_token
  * @property string $role
+ * @property string $city
+ * @property string $country
  * @property string $address
  * @property string $zip
  * @property double $latitude
  * @property double $longitude
  * @property string $phone
  * @property string $website
+ * @property string $photo
  * @property string $facebook
  * @property string $settings
  * @property string $payment
@@ -67,9 +66,6 @@ class User extends Authenticatable {
 	 * @var array
 	 */
 	protected $fillable = [
-		'city_id',
-		'region_id',
-		'country_id',
 		'first_name',
 		'last_name',
 		'about_me',
@@ -78,6 +74,8 @@ class User extends Authenticatable {
 		'email',
 		'password',
 		'role',
+		'city',
+		'country',
 		'address',
 		'zip',
 		'latitude',
