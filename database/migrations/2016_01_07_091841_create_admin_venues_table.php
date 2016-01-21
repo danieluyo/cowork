@@ -17,6 +17,9 @@ class CreateAdminVenuesTable extends Migration
             $table->unsignedInteger('admin_id')->index();
             $table->unsignedInteger('venue_id')->index();
             $table->timestamps();
+
+            $table->foreign('admin_id')->references('id')->on('users');
+            $table->foreign('venue_id')->references('id')->on('venues');
         });
     }
 

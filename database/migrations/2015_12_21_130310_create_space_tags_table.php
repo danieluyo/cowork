@@ -17,6 +17,9 @@ class CreateSpaceTagsTable extends Migration
             $table->unsignedInteger('space_id')->index();
             $table->unsignedInteger('tag_id')->index();
             $table->timestamps();
+
+            $table->foreign('space_id')->references('id')->on('spaces');
+            $table->foreign('tag_id')->references('id')->on('tags');
         });
     }
 

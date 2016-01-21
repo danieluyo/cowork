@@ -15,6 +15,8 @@ class CreateTagsTable extends Migration {
 			$table->string( 'type' )->default( 'amenity' ); // or 'custom_amenity'
 			$table->unsignedInteger('user_id')->nullable(); //if type=custom,this = user_id
 			$table->timestamps();
+
+			$table->foreign('user_id')->references('id')->on('users');
 		} );
 	}
 

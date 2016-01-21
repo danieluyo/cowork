@@ -19,6 +19,7 @@ class CreateSpaceMediaTable extends Migration
             $table->timestamps();
 
             $table->foreign('media_id')->references('id')->on('media')->onDelete('cascade');
+            $table->foreign('space_id')->references('id')->on('spaces');
         });
     }
 
