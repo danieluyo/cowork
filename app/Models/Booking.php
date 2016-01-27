@@ -14,6 +14,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property boolean $is_lab
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property-read \App\Models\User $user
+ * @property-read \App\Models\Space $space
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Lab[] $labs
  */
 class Booking extends Model {
 

@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $content
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property-read \App\Models\User $sender
+ * @property-read \App\Models\User $receiver
  */
 class Message extends Model {
 	/**

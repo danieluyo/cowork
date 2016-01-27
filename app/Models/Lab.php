@@ -21,6 +21,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Lab listsTranslations( $translationField )
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Lab withTranslation()
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Lab whereTranslation( $key, $value, $locale = null )
+ * @property string $photo
+ * @property integer $students_count
+ * @property-read \App\Models\User $teacher
+ * @property-read \App\Models\Booking $booking
  */
 class Lab extends Model {
 

@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $description
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property string $equipments
  */
 class SpaceTranslation extends Model {
 	/**

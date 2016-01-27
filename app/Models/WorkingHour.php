@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $closing
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property integer $venue_id
+ * @property string $closings
  */
 class WorkingHour extends Model {
 	/**

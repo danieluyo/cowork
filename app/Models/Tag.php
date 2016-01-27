@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Tag listsTranslations( $translationField )
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Tag withTranslation()
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Tag whereTranslation( $key, $value, $locale = null )
+ * @property integer $user_id
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Space[] $spaces
  */
 class Tag extends Model {
 	use Translatable;

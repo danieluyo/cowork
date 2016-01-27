@@ -36,6 +36,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Space listsTranslations( $translationField )
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Space withTranslation()
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Space whereTranslation( $key, $value, $locale = null )
+ * @property integer $venue_id
+ * @property boolean $booking_method
+ * @property boolean $capacity
+ * @property-read \App\Models\Venue $revenue
+ * @property-read \App\Models\Category $category
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Booking[] $bookings
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Media[] $media
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
  */
 class Space extends Model {
 
