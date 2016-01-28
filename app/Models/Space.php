@@ -79,7 +79,7 @@ class Space extends Model {
 		'equipments',
 	];
 
-	public function revenue(){
+	public function venue(){
 	    return $this->belongsTo(Venue::class);
 	}
 
