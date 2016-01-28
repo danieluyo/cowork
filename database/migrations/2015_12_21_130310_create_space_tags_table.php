@@ -12,7 +12,7 @@ class CreateSpaceTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('space_tags', function (Blueprint $table) {
+        Schema::create('space_tag', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('space_id')->index();
             $table->unsignedInteger('tag_id')->index();
@@ -30,6 +30,6 @@ class CreateSpaceTagsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('space_tags');
+        Schema::drop('space_tag');
     }
 }
