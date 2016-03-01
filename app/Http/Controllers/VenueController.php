@@ -15,7 +15,8 @@ class VenueController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		$venues = auth()->user()->venues()->with( 'spaces', 'admins', 'media')->paginate( 8 );
+		$venues = auth()->user()->venues()->with( 'spaces', 'admins' )->paginate( 8 );
+
 //		$venues = Venue::with( 'spaces', 'admins', 'logo' )->paginate( 8 );
 
 		return view( 'dashboard.venues.index', compact( 'venues' ) );
@@ -41,7 +42,53 @@ class VenueController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store( Request $request ) {
-		//
+
+		$this->validate( $request, [
+			'name'        => 'required|min:3',
+			'category_id' => 'required',
+		] );
+
+		$venue = new Venue();
+
+		\DB::transaction( function() use ( $request, $venue ) {
+			$venue->city      = $request->get( 'city' );
+			$venue->latitude  = $request->get( 'latitude' );
+			$venue->longitude = $request->get( 'longitude' );
+			$venue->address   = $request->get( 'address' );
+			$venue->country   = $request->get( 'country' );
+			$venue->zip       = $request->get( 'zip' );
+			$venue->number    = $request->get( 'number' );
+			$venue->email     = $request->get( 'email' );
+			$venue->website   = $request->get( 'website' );
+
+			if ( $request->hasFile( 'logo' ) && $request->file( 'logo' )->isValid() ) {
+				$venueLogo = $request->file( 'appIcon' );
+				$uri       = config( 'services.uploads' )['venues-logos'];
+				$path      = public_path() . $uri;
+				$this->createFolderIfNotExists( $path );
+				$destinationPath = $path;
+				$fileName        = "i" . $venue->id . "." . $venueLogo->getClientOriginalExtension();
+				$venueLogo->move( $destinationPath, $fileName );
+				\Log::debug( sprintf( "New icon image has been uploaded to %s, under the name %s", $destinationPath,
+					$fileName ) );
+				$venue->logo = $uri . $fileName; // I might not use it, since I can predict what the name is going to be! id.xx
+			}
+
+			$venue->save();
+		} );
+
+		session()->flash( 'message', [ 'success', 'Successfully Added!' ] );
+		$venues = auth()->user()->venues()->with( 'spaces', 'admins' )->paginate( 8 );
+		return view( 'dashboard.venues.index', compact( 'venues' ) );
+	}
+
+	protected function createFolderIfNotExists( $path ) {
+		$result = true;
+		if ( ! file_exists( $path ) ) {
+			$result = mkdir( $path, 0755, true );
+		}
+
+		return $result;
 	}
 
 	/**
@@ -52,7 +99,9 @@ class VenueController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function show( $id ) {
-		//
+		$venue = Venue::with( 'category', 'spaces.translations' )->where( 'id', $id )->first();
+
+		return view( 'dashboard.venues.show', compact( 'venue' ) );
 	}
 
 	/**
