@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Tag whereTranslation( $key, $value, $locale = null )
  * @property integer $user_id
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Space[] $spaces
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Tag whereTranslationLike($key, $value, $locale = null)
  */
 class Tag extends Model {
 	use Translatable;

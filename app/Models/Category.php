@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Category withTranslation()
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Category whereTranslation( $key, $value, $locale = null )
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Space[] $spaces
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Category whereTranslationLike($key, $value, $locale = null)
  */
 class Category extends Model {
 

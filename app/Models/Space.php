@@ -44,6 +44,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Booking[] $bookings
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Media[] $media
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
+ * @property-read \App\Models\Venue $venue
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Space whereTranslationLike($key, $value, $locale = null)
  */
 class Space extends Model {
 

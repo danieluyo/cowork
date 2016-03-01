@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $students_count
  * @property-read \App\Models\User $teacher
  * @property-read \App\Models\Booking $booking
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Lab whereTranslationLike($key, $value, $locale = null)
  */
 class Lab extends Model {
 
