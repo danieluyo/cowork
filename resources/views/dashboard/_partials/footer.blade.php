@@ -51,6 +51,4 @@
     }
 </script>
 
-@yield('footer')
-
-
+@stack('footer')

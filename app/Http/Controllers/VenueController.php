@@ -78,8 +78,8 @@ class VenueController extends Controller {
 		} );
 
 		session()->flash( 'message', [ 'success', 'Successfully Added!' ] );
-		$venues = auth()->user()->venues()->with( 'spaces', 'admins' )->paginate( 8 );
-		return view( 'dashboard.venues.index', compact( 'venues' ) );
+
+		return redirect( action( 'VenueController@index' ) );
 	}
 
 	protected function createFolderIfNotExists( $path ) {
@@ -112,7 +112,9 @@ class VenueController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit( $id ) {
-		//
+		$venue = Venue::where( 'id', $id )->first();
+
+		return view( 'dashboard.venues.edit', compact( 'venue' ) );
 	}
 
 	/**
@@ -124,7 +126,7 @@ class VenueController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update( Request $request, $id ) {
-		//
+		dd($request->all());
 	}
 
 	/**

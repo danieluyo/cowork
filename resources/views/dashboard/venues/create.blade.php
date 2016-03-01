@@ -4,10 +4,9 @@
 {{--@section('page-description','This page will be filled very soon, for now use the FE version pls!')--}}
 
 @section('sidebar-title','Sidebar title')
-@section('sidebar-content','Content yooo')
 
 @section('content')
-    <form method="POST" action="{{ action('VenueController@store') }}">
+    <form method="POST" action="{{ action('VenueController@store') }}" accept-charset="UTF-8" enctype="multipart/form-data">
         {{ csrf_field() }}
 
         <div class="form-group form-material">
@@ -49,72 +48,36 @@
             </div>
         </div>
 
-        <style>
-            #map {
-                height: 300px;
-            }
 
-            .controls {
-                margin-top: 10px;
-                border: 1px solid transparent;
-                border-radius: 2px 0 0 2px;
-                box-sizing: border-box;
-                -moz-box-sizing: border-box;
-                height: 32px;
-                outline: none;
-                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-            }
-
-            #pac-input {
-                background-color: #fff;
-                font-family: Roboto;
-                font-size: 15px;
-                font-weight: 300;
-                margin-left: 12px;
-                padding: 0 11px 0 13px;
-                text-overflow: ellipsis;
-                width: 300px;
-            }
-
-            #pac-input:focus {
-                border-color: #4d90fe;
-            }
-
-            .pac-container {
-                font-family: Roboto;
-            }
-
-            #type-selector {
-                color: #fff;
-                background-color: #4d90fe;
-                padding: 5px 11px 0px 11px;
-            }
-
-            #type-selector label {
-                font-family: Roboto;
-                font-size: 13px;
-                font-weight: 300;
-            }
-        </style>
         <div class="form-group form-material">
-            <label class="control-label" for="city">City</label>
-            <input type="text" class="controls form-control" id="pac-input" name="city"
+            <label class="control-label" for="city">City *</label>
+            <input type="text" class="controls form-control" id="city" name="city"
                    value="{{ old('city') }}" placeholder="Enter your City" required/>
             @if ($errors->has('city'))
                 <span class="help-block">
                         <strong>{{ $errors->first('city') }}</strong>
                         </span>
             @endif
-            <div id="map"></div>
+            @section('sidebar-content')
+                <div id="map" style="height: 300px"></div>
+                <input type="hidden" id="latitude" name="latitude" value="41.0082">
+                <input type="hidden" id="longitude" name="longitude" value="28.9784">
+                <div class="help-block">
+                    <p class="geo-location">
+                        <span id="markerPosition"></span>
+                                <span class="pull-right">
+                                    Latitude:&nbsp;<span id="lat">41.0082</span>&nbsp;&nbsp;
+                                    Longitude:&nbsp;<span id="lng">28.9784</span>&nbsp;&nbsp;
+                                </span>
+                    </p>
+                </div>
+            @endsection
+
         </div>
-
-        <input type="hidden" id="latitude" name="latitude">
-        <input type="hidden" id="longitude" name="longitude">
-
 
         <div class="form-group form-material">
             <label class="control-label" for="address">Address</label>
-            <input type="text" class="form-control" name="address" value="{{ old('address') }}"/>
+            <input type="text" class="form-control" id="address" name="address" value="{{ old('address') }}"/>
             @if ($errors->has('address'))
                 <span class="help-block">
                                 <strong>{{ $errors->first('address') }}</strong>
@@ -203,7 +166,7 @@
             @if ($errors->has('email'))
                 <span class="help-block">
                         <strong>{{ $errors->first('email') }}</strong>
-                        </span>
+                </span>
             @endif
         </div>
 
@@ -226,70 +189,70 @@
     </form>
 @endsection
 
-@section('head')
-    <link rel="stylesheet"
-          href="{{config('cache.static_files_root')}}/global/vendor/bootstrap-select/bootstrap-select.css">
-    <link rel="stylesheet"
-          href="{{config('cache.static_files_root')}}/assets/css/intlTelInput.css">
-@endsection
+@push('head')
+<link rel="stylesheet"
+      href="{{config('cache.static_files_root')}}/global/vendor/bootstrap-select/bootstrap-select.css">
+<link rel="stylesheet"
+      href="{{config('cache.static_files_root')}}/assets/css/intlTelInput.css">
+@endpush
 
-@section('footer')
-    <script src="{{config('cache.static_files_root')}}/global/vendor/bootstrap-select/bootstrap-select.js"></script>
-    <script src="{{config('cache.static_files_root')}}/global/js/components/bootstrap-select.js"></script>
-    <script src="{{config('cache.static_files_root')}}/assets/js/intlTelInput.min.js"></script>
-    <script src="{{config('cache.static_files_root')}}/assets/js/googleMaps.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initAutocomplete"
-            async defer></script>
+@push('footer')
+<script src="{{config('cache.static_files_root')}}/global/vendor/bootstrap-select/bootstrap-select.js"></script>
+<script src="{{config('cache.static_files_root')}}/global/js/components/bootstrap-select.js"></script>
+<script src="{{config('cache.static_files_root')}}/assets/js/intlTelInput.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initAutocomplete" async defer>
+</script>
+<script src="{{config('cache.static_files_root')}}/assets/js/googleMaps.js"></script>
 
-    <script>
-        $(document).ready(function () {
+<script>
+    $(document).ready(function () {
 
-            function readURL(input, imgSelector) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        imgSelector.attr('src', e.target.result);
-                    }
-                    reader.readAsDataURL(input.files[0]);
+        function readURL(input, imgSelector) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    imgSelector.attr('src', e.target.result);
                 }
+                reader.readAsDataURL(input.files[0]);
             }
+        }
 
-            $("#logo").change(function () {
-                readURL(this, $('#logoImg'));
-            });
+        $("#logo").change(function () {
+            readURL(this, $('#logoImg'));
+        });
 
-            var countryData = $.fn.intlTelInput.getCountryData();
-            $.each(countryData, function (i, country) {
-                country.name = country.name.replace(/.+\((.+)\)/, "$1");
-            });
+        var countryData = $.fn.intlTelInput.getCountryData();
+        $.each(countryData, function (i, country) {
+            country.name = country.name.replace(/.+\((.+)\)/, "$1");
+        });
 
-            var telInput = $("#number"),
-                    errorMsg = $("#error-msg"),
-                    validMsg = $("#valid-msg"),
-                    country = $("#country");
+        var telInput = $("#number"),
+                errorMsg = $("#error-msg"),
+                validMsg = $("#valid-msg"),
+                country = $("#country");
 
-            // initialise plugin
-            telInput.intlTelInput({
-                nationalMode: true,
-                initialCountry: "auto",
-                preferredCountries: ["us", "tr"],
-                geoIpLookup: function (callback) {
-                    $.get('http://ipinfo.io', function () {
-                    }, "jsonp").always(function (resp) {
-                        var countryCode = (resp && resp.country) ? resp.country : "";
-                        callback(countryCode);
-                    });
-                },
-                utilsScript: "{{config('cache.static_files_root')}}/assets/js/utils.js"
-            });
+        // initialise plugin
+        telInput.intlTelInput({
+            nationalMode: true,
+            initialCountry: "auto",
+            preferredCountries: ["us", "tr"],
+            geoIpLookup: function (callback) {
+                $.get('http://ipinfo.io', function () {
+                }, "jsonp").always(function (resp) {
+                    var countryCode = (resp && resp.country) ? resp.country : "";
+                    callback(countryCode);
+                });
+            },
+            utilsScript: "{{config('cache.static_files_root')}}/assets/js/utils.js"
+        });
 
-            // listen to the address dropdown for changes
-            country.change(function () {
-                var countryCode = $(this).val();
-                telInput.intlTelInput("setCountry", countryCode);
-            });
+        // listen to the address dropdown for changes
+        country.change(function () {
+            var countryCode = $(this).val();
+            telInput.intlTelInput("setCountry", countryCode);
+        });
 
-            // listen to "keyup", but also "change" to update when the user selects a country
+        // listen to "keyup", but also "change" to update when the user selects a country
 //            telInput.on("keyup change", function() {
 //                var intlNumber = telInput.intlTelInput("getNumber");
 //                if (intlNumber) {
@@ -299,28 +262,28 @@
 //                }
 //            });
 
-            var reset = function () {
-                telInput.removeClass("error");
-                errorMsg.addClass("hide");
-                validMsg.addClass("hide");
-            };
+        var reset = function () {
+            telInput.removeClass("error");
+            errorMsg.addClass("hide");
+            validMsg.addClass("hide");
+        };
 
-            // on blur: validate
-            telInput.blur(function () {
-                reset();
-                if ($.trim(telInput.val())) {
-                    if (telInput.intlTelInput("isValidNumber")) {
-                        validMsg.removeClass("hide");
-                    } else {
-                        telInput.addClass("error");
-                        errorMsg.removeClass("hide");
-                    }
+        // on blur: validate
+        telInput.blur(function () {
+            reset();
+            if ($.trim(telInput.val())) {
+                if (telInput.intlTelInput("isValidNumber")) {
+                    validMsg.removeClass("hide");
+                } else {
+                    telInput.addClass("error");
+                    errorMsg.removeClass("hide");
                 }
-            });
-
-            // on keyup / change flag: reset
-            telInput.on("keyup change", reset);
+            }
         });
 
-    </script>
-@endsection
+        // on keyup / change flag: reset
+        telInput.on("keyup change", reset);
+    });
+
+</script>
+@endpush

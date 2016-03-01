@@ -16,7 +16,7 @@
 <link rel="stylesheet"
       href="{{config('cache.static_files_root')}}/global/fonts/material-design/material-design.min.css">
 <link rel="stylesheet" href="{{config('cache.static_files_root')}}/global/fonts/brand-icons/brand-icons.min.css">
-<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
+{{--<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>--}}
 <!--[if lt IE 9]>
 <script src="{{config('cache.static_files_root')}}/global/vendor/html5shiv/html5shiv.min.js"></script>
 <![endif]-->
@@ -31,4 +31,4 @@
     Breakpoints();
 </script>
 <link id="skinStyle" href="{{config('cache.static_files_root')}}/assets/skins/blue.css" rel="stylesheet" type="text/css">
-@yield('head')
+@stack('head')

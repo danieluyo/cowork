@@ -8,6 +8,7 @@
 @section('content')
 
     @if(auth()->user()->role == \App\Models\User::ROLE_ADMIN)
+
 @section('sidebar-title','Tip')
 
 <div class="container">
@@ -169,8 +170,8 @@
 
 @endsection
 
-@section('footer')
+@push('footer')
     <script src="{{config('cache.static_files_root')}}/global/js/plugins/selectable.js"></script>
     <script src="{{config('cache.static_files_root')}}/global/js/components/selectable.js"></script>
     <script src="{{config('cache.static_files_root')}}/global/js/components/table.js"></script>
-@endsection
+@endpush

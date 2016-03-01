@@ -1,8 +1,17 @@
-
+var marker
+var input = $('#address')[0];
+var image = '/assets/img/map-pin.png';
 function initAutocomplete() {
+    var defaultCenter = new google.maps.LatLng($('#latitude').val(),$('#longitude').val());
+    var infowindow = new google.maps.InfoWindow();
+    var city = new google.maps.places.Autocomplete(document.getElementById('city'),{types: ['geocode']});
+    var autocomplete = new google.maps.places.Autocomplete(input);
+
     var map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: -33.8688, lng: 151.2195},
-        zoom: 13,
+        scrollwheel: false,
+        center: defaultCenter,
+        zoom: 8,
+        streetViewControl: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         mapTypeControl: true,
         mapTypeControlOptions: {
@@ -11,66 +20,111 @@ function initAutocomplete() {
         }
     });
 
-    // Create the search box and link it to the UI element.
-    var input = document.getElementById('pac-input');
-    var searchBox = new google.maps.places.SearchBox(input);
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+    autocomplete.bindTo('bounds', map);
 
+    marker = new google.maps.Marker({
+        position: defaultCenter,
+        map: map,
+        icon: image,
+        title: "Desired Location",
+        draggable:true,
+        animation: google.maps.Animation.DROP,
+    });
+
+
+    //map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
     google.maps.event.addDomListener(input, 'keydown', function(e) {
         if (e.keyCode == 13) {
             e.preventDefault();
         }
     });
 
-    // Bias the SearchBox results towards current map's viewport.
-    map.addListener('bounds_changed', function() {
-        searchBox.setBounds(map.getBounds());
+    // Bias the searchBox results towards current map's viewport.
+    /*    map.addListener('bounds_changed', function() {
+     searchBox.setBounds(map.getBounds());
+     });*/
+
+    google.maps.event.addListener(marker, 'click', function() {
+        infowindow.open(map, marker);
+        toggleBounce();
     });
 
-    var markers = [];
-    // [START region_getplaces]
-    // Listen for the event fired when the user selects a prediction and retrieve
-    // more details for that place.
-    searchBox.addListener('places_changed', function() {
-        var places = searchBox.getPlaces();
+    google.maps.event.addListener(marker, 'dragend', function(evt){
+        $('#lat').html(evt.latLng.lat().toFixed(4));
+        $('#lng').html(evt.latLng.lng().toFixed(4));
+        $('#latitude').val(evt.latLng.lat().toFixed(4));
+        $('#longitude').val(evt.latLng.lng().toFixed(4));
+        $('#markerPosition').html('<i>Marker dropped</i>');
+        map.setCenter(this.position);
+        geocodePosition(this.getPosition());
+    });
+    google.maps.event.addListener(marker, 'dragstart', function(evt){
+        $('#markerPosition').html('<i class="fa fa-refresh fa-spin" style="font-size:1.3em;color:#e1c950"></i><i> Currently dragging marker...</i>');
+    });
 
-        if (places.length == 0) {
+    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+        infowindow.close();
+        var place = autocomplete.getPlace();
+        if (!place.geometry) {
             return;
         }
 
-        // Clear out the old markers.
-        markers.forEach(function(marker) {
-            marker.setMap(null);
-        });
-        markers = [];
+        if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+        } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(17);
+        }
 
-        // For each place, get the icon, name and location.
-        var bounds = new google.maps.LatLngBounds();
-        places.forEach(function(place) {
-            var icon = {
-                url: place.icon,
-                size: new google.maps.Size(71, 71),
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(17, 34),
-                scaledSize: new google.maps.Size(25, 25)
-            };
+        // Set the position of the marker using the place ID and location
+        //marker.setPlace({
+        //    placeId: place.place_id,
+        //    location: place.geometry.location
+        //});
+        marker.setPosition(place.geometry.location);
+        marker.setAnimation(google.maps.Animation.DROP);
+        marker.setVisible(true);
 
-            // Create a marker for each place.
-            markers.push(new google.maps.Marker({
-                map: map,
-                icon: icon,
-                title: place.name,
-                position: place.geometry.location
-            }));
+        $('#lat').html(place.geometry.location.lat().toFixed(4));
+        $('#lng').html(place.geometry.location.lng().toFixed(4));
+        $('#latitude').val(place.geometry.location.lat().toFixed(4));
+        $('#longitude').val(place.geometry.location.lng().toFixed(4));
+        $('#markerPosition').html('<i>Marker dropped:</i>');
 
-            if (place.geometry.viewport) {
-                // Only geocodes have viewport.
-                bounds.union(place.geometry.viewport);
-            } else {
-                bounds.extend(place.geometry.location);
-            }
-        });
-        map.fitBounds(bounds);
+        infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+                /*'Place ID: ' + place.place_id + '<br>' +*/
+            place.formatted_address);
+        //infowindow.open(map, marker);
     });
-    // [END region_getplaces]
+}
+
+
+function toggleBounce() {
+    if (marker.getAnimation() != null) {
+        marker.setAnimation(null);
+    } else {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
+}
+
+
+function geocodePosition(pos)
+{
+    geocoder = new google.maps.Geocoder();
+    geocoder.geocode
+    ({
+            latLng: pos
+        },
+        function(results, status)
+        {
+            if (status == google.maps.GeocoderStatus.OK)
+            {
+                $("#address").val(results[0].formatted_address);
+            }
+            else
+            {
+                $.growl.error({ title: "Error", message: "Cannot determine address at this location." });
+            }
+        }
+    );
 }

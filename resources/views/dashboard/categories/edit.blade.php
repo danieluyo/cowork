@@ -70,7 +70,7 @@
     <!-- End Panel Floating Lables -->
 @endsection
 
-@section('head')
+@push('head')
     <link rel="stylesheet"
           href="{{config('cache.static_files_root')}}/global/vendor/bootstrap-select/bootstrap-select.css">
     <style>
@@ -78,9 +78,9 @@
         /*width: 100% !important;*/
         /*}*/
     </style>
-@endsection
+@endpush
 
-@section('footer')
+@push('footer')
     <script src="{{config('cache.static_files_root')}}/global/vendor/bootstrap-select/bootstrap-select.js"></script>
     <script src="{{config('cache.static_files_root')}}/global/js/components/bootstrap-select.js"></script>
-@endsection
+@endpush
