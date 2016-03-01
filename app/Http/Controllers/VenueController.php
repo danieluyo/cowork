@@ -51,6 +51,7 @@ class VenueController extends Controller {
 		$venue = new Venue();
 
 		\DB::transaction( function() use ( $request, $venue ) {
+			$venue->name      = $request->get( 'name' );
 			$venue->city      = $request->get( 'city' );
 			$venue->latitude  = $request->get( 'latitude' );
 			$venue->longitude = $request->get( 'longitude' );
@@ -128,7 +129,45 @@ class VenueController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update( Request $request, $id ) {
-		dd( $request->all() );
+
+		$this->validate( $request, [
+			'name'        => 'required|min:3',
+			'category_id' => 'required',
+		] );
+
+		$venue = Venue::where( 'id', $id )->first();
+
+		\DB::transaction( function() use ( $request, $venue ) {
+			$venue->name      = $request->get( 'name' );
+			$venue->city      = $request->get( 'city' );
+			$venue->latitude  = $request->get( 'latitude' );
+			$venue->longitude = $request->get( 'longitude' );
+			$venue->address   = $request->get( 'address' );
+			$venue->country   = $request->get( 'country' );
+			$venue->zip       = $request->get( 'zip' );
+			$venue->number    = $request->get( 'number' );
+			$venue->email     = $request->get( 'email' );
+			$venue->website   = $request->get( 'website' );
+
+			if ( $request->hasFile( 'logo' ) && $request->file( 'logo' )->isValid() ) {
+				$venueLogo = $request->file( 'appIcon' );
+				$uri       = config( 'services.uploads' )['venues-logos'];
+				$path      = public_path() . $uri;
+				$this->createFolderIfNotExists( $path );
+				$destinationPath = $path;
+				$fileName        = "i" . $venue->id . "." . $venueLogo->getClientOriginalExtension();
+				$venueLogo->move( $destinationPath, $fileName );
+				\Log::debug( sprintf( "New icon image has been uploaded to %s, under the name %s", $destinationPath,
+					$fileName ) );
+				$venue->logo = $uri . $fileName; // I might not use it, since I can predict what the name is going to be! id.xx
+			}
+
+			$venue->save();
+		} );
+
+		session()->flash( 'message', [ 'success', 'Successfully Updated!' ] );
+
+		return redirect( action( 'VenueController@index' ) );
 	}
 
 	/**
