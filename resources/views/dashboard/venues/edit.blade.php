@@ -188,7 +188,7 @@
         <br>
 
         <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary waves-effect waves-light">Save</button>
+            <button type="submit" class="btn btn-success waves-effect waves-light">Update {{$venue->name}}</button>
         </div>
 
     </form>
