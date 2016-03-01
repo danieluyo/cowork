@@ -92,7 +92,7 @@ class Space extends Model {
 	}
 
 	public function media() {
-		return $this->belongsToMany( Media::class )->withTimestamps();
+		return $this->belongsToMany( Media::class,'space_media' )->withTimestamps();
 	}
 
 	public function tags() {
