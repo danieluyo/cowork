@@ -6,7 +6,7 @@
 @section('page-description','This page will be filled very soon, for now use the FE version pls!')
 
 @section('content')
-    <form method="POST" action="{{ action('VenueController@update') }}" accept-charset="UTF-8"
+    <form method="POST" action="{{ action('VenueController@update',$venue->id) }}" accept-charset="UTF-8"
           enctype="multipart/form-data">
         {{ csrf_field() }}
         <input type="hidden" name="_method" value="PUT">

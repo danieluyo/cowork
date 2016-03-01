@@ -112,9 +112,11 @@ class VenueController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function edit( $id ) {
-		$venue = Venue::where( 'id', $id )->first();
+		$venue      = Venue::where( 'id', $id )->first();
+		$categories = Category::with( 'translations' )->get();
+		$amenities  = Tag::with( 'translations' )->get();
 
-		return view( 'dashboard.venues.edit', compact( 'venue' ) );
+		return view( 'dashboard.venues.edit', compact( 'venue', 'categories', 'amenities' ) );
 	}
 
 	/**
@@ -126,7 +128,7 @@ class VenueController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function update( Request $request, $id ) {
-		dd($request->all());
+		dd( $request->all() );
 	}
 
 	/**
