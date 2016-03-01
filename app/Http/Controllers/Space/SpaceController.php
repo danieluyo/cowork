@@ -16,7 +16,7 @@ class SpaceController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		$spaces = Space::with( 'translations', 'user' )->paginate( 8 );
+		$spaces = Space::with( 'translations', 'venue', 'category','bookings','media','tags')->paginate( 8 );
 
 		return view( 'dashboard.spaces.index', compact( 'spaces' ) );
 	}
