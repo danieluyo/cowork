@@ -45,7 +45,7 @@
 
     function deleteItem(obj) {
         if (confirm('Are you sure you want to delete this item?')) {
-            $(obj).parent().submit();
+            $(obj).parent().parent().submit();
         }
         return false;
     }
