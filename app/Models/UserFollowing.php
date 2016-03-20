@@ -12,6 +12,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $following_id
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\UserFollowing whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\UserFollowing whereFollowerId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\UserFollowing whereFollowingId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\UserFollowing whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\UserFollowing whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class UserFollowing extends Model {
 

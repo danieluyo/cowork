@@ -20,6 +20,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Category whereTranslation( $key, $value, $locale = null )
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Space[] $spaces
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Category whereTranslationLike($key, $value, $locale = null)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Category whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Category whereParentId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Category whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Category whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Category extends Model {
 
@@ -31,6 +36,14 @@ class Category extends Model {
 	 * @var array
 	 */
 	public $translatedAttributes = [ 'title', 'description' ];
+
+
+	/**
+	 * The relations to eager load on every query.
+	 *
+	 * @var array
+	 */
+	protected $with = [ 'translations' ];
 
 	/**
 	 * The attributes that are mass assignable.

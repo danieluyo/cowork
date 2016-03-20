@@ -46,6 +46,22 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Tag[] $tags
  * @property-read \App\Models\Venue $venue
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Space whereTranslationLike($key, $value, $locale = null)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Space whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Space whereVenueId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Space whereCategoryId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Space whereBookingMethod($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Space whereCapacity($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Space whereHourlyPrice($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Space whereDailyPrice($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Space whereMonthlyPrice($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Space whereArea($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Space whereRatings($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Space whereImpacts($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Space whereIsFeatured($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Space whereStatus($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Space whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Space whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Space extends Model {
 
@@ -58,6 +74,12 @@ class Space extends Model {
 	 */
 	public $translatedAttributes = [ 'title', 'description','equipments' ];
 
+	/**
+	 * The relations to eager load on every query.
+	 *
+	 * @var array
+	 */
+	protected $with = [ 'translations','category' ];
 	/**
 	 * The attributes that are mass assignable.
 	 *

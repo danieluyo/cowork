@@ -26,6 +26,16 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Models\User $teacher
  * @property-read \App\Models\Booking $booking
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Lab whereTranslationLike($key, $value, $locale = null)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Lab whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Lab whereTeacherId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Lab whereBookingId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Lab wherePhoto($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Lab wherePrice($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Lab whereStudentsCount($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Lab whereStatus($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Lab whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Lab whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Lab extends Model {
 
@@ -45,6 +55,12 @@ class Lab extends Model {
 	 */
 	protected $fillable = [ 'teacher_id', 'booking_id', 'price', 'status', 'title', 'description' ];
 
+	/**
+	 * The relations to eager load on every query.
+	 *
+	 * @var array
+	 */
+	protected $with = [ 'translations','teacher' ];
 
 	public function teacher() {
 		return $this->belongsTo( User::class, 'teacher_id' );

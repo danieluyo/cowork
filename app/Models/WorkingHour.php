@@ -16,6 +16,14 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon $updated_at
  * @property integer $venue_id
  * @property string $closings
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\WorkingHour whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\WorkingHour whereVenueId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\WorkingHour whereDay($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\WorkingHour whereOpenings($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\WorkingHour whereClosings($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\WorkingHour whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\WorkingHour whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class WorkingHour extends Model {
 	/**

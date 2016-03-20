@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $tag_id
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @mixin \Eloquent
  */
 class SpaceTag extends Model {
 	/**

@@ -21,6 +21,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $user_id
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Space[] $spaces
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Tag whereTranslationLike($key, $value, $locale = null)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Tag whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Tag whereType($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Tag whereUserId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Tag whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Tag whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Tag extends Model {
 	use Translatable;
@@ -31,6 +37,13 @@ class Tag extends Model {
 	 * @var array
 	 */
 	public $translatedAttributes = [ 'title', 'description' ];
+
+	/**
+	 * The relations to eager load on every query.
+	 *
+	 * @var array
+	 */
+	protected $with = [ 'translations' ];
 
 	/**
 	 * The attributes that are mass assignable.

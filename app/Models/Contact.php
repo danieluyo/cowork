@@ -13,6 +13,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $content
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\ContactUs whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\ContactUs whereName($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\ContactUs whereEmail($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\ContactUs whereContent($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\ContactUs whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\ContactUs whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class ContactUs extends Model {
 	protected $table = "contact_us";
