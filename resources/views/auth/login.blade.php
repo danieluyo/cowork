@@ -11,7 +11,7 @@
 <div class="panel">
     <div class="panel-body">
         <div class="brand">
-            <img class="brand-img" src="/assets/img/cowork_logo_200x80.png" alt="...">
+            <img class="brand-img" src="/assets/img/cowork_logo_200x80.png" alt="{{ trans('strings.app_name') }} logo">
             {{--<h2 class="brand-text font-size-18">{{ trans('strings.app_name') }}</h2>--}}
         </div>
         <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
