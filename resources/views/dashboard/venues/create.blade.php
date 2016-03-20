@@ -6,22 +6,23 @@
 @section('sidebar-title','Sidebar title')
 
 @section('content')
-    <form method="POST" action="{{ action('VenueController@store') }}" accept-charset="UTF-8" enctype="multipart/form-data">
+    <form method="POST" action="{{ action('VenueController@store') }}" accept-charset="UTF-8"
+          enctype="multipart/form-data">
         {{ csrf_field() }}
 
-        <div class="form-group form-material">
+        <div class="form-group form-material {{ $errors->has('name') ? ' has-error' : '' }}">
             <label class="control-label" for="name">My Venue Name *</label>
             <input type="text" class="form-control" name="name"
                    value="{{ old('name') }}" required/>
             @if ($errors->has('name'))
                 <span class="help-block">
-                            <strong>{{ $errors->first('name') }}</strong>
-                            </span>
+                    <strong>{{ $errors->first('name') }}</strong>
+                </span>
             @endif
         </div>
 
-        <div class="form-group form-material">
-            <label class="control-label" for="category_id">Category</label>
+        <div class="form-group form-material {{ $errors->has('category_id') ? ' has-error' : '' }}">
+            <label class="control-label" for="category_id">Category *</label>
             <select class="form-control" name="category_id">
                 <option disabled selected>&nbsp;</option>
                 @foreach($categories as $cat)
@@ -35,6 +36,11 @@
                     @endif
                 @endforeach
             </select>
+            @if ($errors->has('category_id'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('category_id') }}</strong>
+                </span>
+            @endif
         </div>
 
         <div class="form-group form-material row form-material-file">

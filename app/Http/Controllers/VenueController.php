@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Models\Category;
 use App\Models\Tag;
 use App\Models\Venue;
+use DB;
 use Illuminate\Http\Request;
 
 class VenueController extends Controller {
@@ -15,7 +16,7 @@ class VenueController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function index() {
-		$venues = auth()->user()->venues()->with( 'spaces', 'admins' )->paginate( 8 );
+		$venues = auth()->user()->venues()->paginate( 8 );
 
 //		$venues = Venue::with( 'spaces', 'admins', 'logo' )->paginate( 8 );
 
@@ -51,19 +52,20 @@ class VenueController extends Controller {
 		$venue = new Venue();
 
 		\DB::transaction( function() use ( $request, $venue ) {
-			$venue->name      = $request->get( 'name' );
-			$venue->city      = $request->get( 'city' );
-			$venue->latitude  = $request->get( 'latitude' );
-			$venue->longitude = $request->get( 'longitude' );
-			$venue->address   = $request->get( 'address' );
-			$venue->country   = $request->get( 'country' );
-			$venue->zip       = $request->get( 'zip' );
-			$venue->number    = $request->get( 'number' );
-			$venue->email     = $request->get( 'email' );
-			$venue->website   = $request->get( 'website' );
+			$venue->name        = $request->get( 'name' );
+			$venue->category_id = $request->get( 'category_id' );
+			$venue->city        = $request->get( 'city' );
+			$venue->latitude    = $request->get( 'latitude' );
+			$venue->longitude   = $request->get( 'longitude' );
+			$venue->address     = $request->get( 'address' );
+			$venue->country     = $request->get( 'country' );
+			$venue->zip         = $request->get( 'zip' );
+			$venue->number      = $request->get( 'number' );
+			$venue->email       = $request->get( 'email' );
+			$venue->website     = $request->get( 'website' );
 
 			if ( $request->hasFile( 'logo' ) && $request->file( 'logo' )->isValid() ) {
-				$venueLogo = $request->file( 'appIcon' );
+				$venueLogo = $request->file( 'logo' );
 				$uri       = config( 'services.uploads' )['venues-logos'];
 				$path      = public_path() . $uri;
 				$this->createFolderIfNotExists( $path );
@@ -74,8 +76,8 @@ class VenueController extends Controller {
 					$fileName ) );
 				$venue->logo = $uri . $fileName; // I might not use it, since I can predict what the name is going to be! id.xx
 			}
-
 			$venue->save();
+			$venue->admins()->attach( auth()->user() );
 		} );
 
 		session()->flash( 'message', [ 'success', 'Successfully Added!' ] );
@@ -138,16 +140,17 @@ class VenueController extends Controller {
 		$venue = Venue::where( 'id', $id )->first();
 
 		\DB::transaction( function() use ( $request, $venue ) {
-			$venue->name      = $request->get( 'name' );
-			$venue->city      = $request->get( 'city' );
-			$venue->latitude  = $request->get( 'latitude' );
-			$venue->longitude = $request->get( 'longitude' );
-			$venue->address   = $request->get( 'address' );
-			$venue->country   = $request->get( 'country' );
-			$venue->zip       = $request->get( 'zip' );
-			$venue->number    = $request->get( 'number' );
-			$venue->email     = $request->get( 'email' );
-			$venue->website   = $request->get( 'website' );
+			$venue->name        = $request->get( 'name' );
+			$venue->category_id = $request->get( 'category_id' );
+			$venue->city        = $request->get( 'city' );
+			$venue->latitude    = $request->get( 'latitude' );
+			$venue->longitude   = $request->get( 'longitude' );
+			$venue->address     = $request->get( 'address' );
+			$venue->country     = $request->get( 'country' );
+			$venue->zip         = $request->get( 'zip' );
+			$venue->number      = $request->get( 'number' );
+			$venue->email       = $request->get( 'email' );
+			$venue->website     = $request->get( 'website' );
 
 			if ( $request->hasFile( 'logo' ) && $request->file( 'logo' )->isValid() ) {
 				$venueLogo = $request->file( 'appIcon' );
@@ -175,9 +178,25 @@ class VenueController extends Controller {
 	 *
 	 * @param  int $id
 	 *
+	 * @param Request $request
+	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy( $id ) {
-		//
+	public function destroy( $id, Request $request ) {
+		if ( $request->user()->can( 'admin' ) || $request->user()->can( 'super' ) ) {
+
+			$venue = Venue::find( $id );
+			DB::transaction( function() use ( $venue ) {
+				$venue->admins()->detach( auth()->user() );
+				$venue->delete();
+				session()->flash( 'message', [ 'warning', "{$venue->name} Successfully Deleted!" ] );
+			} );
+
+			return redirect( action( 'VenueController@index' ) );
+		}
+		session()->flash( 'message', [ 'danger', 'Unauthorized!' ] );
+
+		return redirect( action( 'VenueController@index' ) );
+
 	}
 }
