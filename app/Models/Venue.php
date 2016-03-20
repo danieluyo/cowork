@@ -28,23 +28,23 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Space[] $spaces
  * @property-read \App\Models\Category $category
  * @property-read \App\Models\Currency $currency
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereName($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereCategoryId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereLogo($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereCity($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereCountry($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereAddress($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereZip($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereLatitude($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereLongitude($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereTaxRate($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereCurrencyId($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereNumber($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereEmail($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereWebsite($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereCreatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereId( $value )
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereName( $value )
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereCategoryId( $value )
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereLogo( $value )
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereCity( $value )
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereCountry( $value )
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereAddress( $value )
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereZip( $value )
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereLatitude( $value )
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereLongitude( $value )
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereTaxRate( $value )
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereCurrencyId( $value )
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereNumber( $value )
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereEmail( $value )
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereWebsite( $value )
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereCreatedAt( $value )
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Venue whereUpdatedAt( $value )
  * @mixin \Eloquent
  */
 class Venue extends Model {
@@ -54,7 +54,7 @@ class Venue extends Model {
 	 *
 	 * @var array
 	 */
-	protected $with = [ 'category' ,'spaces' ];
+	protected $with = [ 'category', 'spaces' ];
 
 	/**
 	 * The attributes that are mass assignable.
@@ -80,7 +80,7 @@ class Venue extends Model {
 	];
 
 	public function admins() {
-		return $this->belongsToMany( User::class, 'admin_venues', 'admin_id', 'id' )->withTimestamps();
+		return $this->belongsToMany( User::class, 'admin_venues', 'venue_id', 'admin_id' )->withTimestamps();
 	}
 
 	public function spaces() {

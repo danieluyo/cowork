@@ -39,6 +39,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable {
 
+	const STATUS_ACTIVE = 1;
 	const ROLE_SUPER = 'SUPER';
 	const ROLE_ADMIN = 'ADMIN';
 	const ROLE_TUTOR = 'TUTOR';
