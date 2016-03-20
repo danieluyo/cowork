@@ -7,10 +7,8 @@
 
 @section('content')
 
-    @if(auth()->user()->role == \App\Models\User::ROLE_ADMIN)
-
+@can("admin")
 @section('sidebar-title','Tip')
-
 <div class="container">
     <div class="col-md-6">
         <div class="widget">
@@ -67,111 +65,111 @@
         </div>
     </div>
 </div>
+@endcan
+@can("super")
+<table class="table table-default table-hover table-responsive table-bordered">
+    <thead>
+    <tr>
+        <th class="width-50">
+        </th>
+        <th>
+            Title
+        </th>
+        <th>
+            Owner
+        </th>
+        <th class="hidden-xs width-100">
+            Edit
+        </th>
+    </tr>
+    </thead>
 
-@elseif(auth()->user()->role == \App\Models\User::ROLE_SUPER)
-    <table class="table table-default table-hover table-responsive table-bordered">
-        <thead>
+    @foreach($spaces as $space)
+
+        <tbody class="table-section">
         <tr>
-            <th class="width-50">
-            </th>
-            <th>
-                Title
-            </th>
-            <th>
-                Owner
-            </th>
-            <th class="hidden-xs width-100">
-                Edit
-            </th>
+            <td class="text-center"><i class="table-section-arrow"></i></td>
+            <td class="font-weight-bold">
+                {{ $space->title }}
+            </td>
+            <td>
+                {{--<span class="label label-danger">Canceled</span>--}}
+
+                {{ $space->user->first_name }} {{ $space->user->last_name }}
+            </td>
+            <td class="hidden-xs">
+                        <span class="text-muted">
+                            <button type="button" class="btn btn-sm btn-icon btn-flat btn-default"
+                                    data-toggle="tooltip" data-original-title="Edit">
+                                <i class="icon md-wrench" aria-hidden="true"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-icon btn-flat btn-default"
+                                    data-toggle="tooltip" data-original-title="Delete">
+                                <i class="icon md-close" aria-hidden="true"></i>
+                            </button>
+                        </span>
+            </td>
         </tr>
-        </thead>
+        </tbody>
+        <tbody>
 
-        @foreach($spaces as $space)
+        <tr>
+            {{--<td></td>--}}
+            <td colspan="4">
+                <table class="table table-responsive table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Area</th>
+                        <th>Prices</th>
+                        <th>Max People</th>
+                        <th>Address</th>
+                        <th>Featured</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{ $space->category_id }}</td>
+                        <td>{{ $space->area }}</td>
+                        <td>
+                            <div data-toggle="tooltip"
+                                 data-original-title="Hourly / Daily / Monthly">
+                                ${{ $space->hourly_price }} -
+                                ${{ $space->daily_price }} -
+                                ${{ $space->monthly_price }}
+                            </div>
+                        </td>
+                        <td>{{ $space->max_number_of_people }}</td>
+                        <td>{{ $space->address }}</td>
+                        <td>
+                            @if($space->is_featured)
+                                <span class="label label-success">YES</span>
+                            @else(!$space->is_featured)
+                                <span class="label label-danger">NO</span>
+                            @endif
+                            @if($space->status == -1)
+                                <span class="label label-danger">not active</span>
+                            @endif
+                        </td>
+                        <td>{{ str_limit($space->description) }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+    @endforeach
 
-            <tbody class="table-section">
-            <tr>
-                <td class="text-center"><i class="table-section-arrow"></i></td>
-                <td class="font-weight-bold">
-                    {{ $space->title }}
-                </td>
-                <td>
-                    {{--<span class="label label-danger">Canceled</span>--}}
-
-                    {{ $space->user->first_name }} {{ $space->user->last_name }}
-                </td>
-                <td class="hidden-xs">
-                    <span class="text-muted">
-                        <button type="button" class="btn btn-sm btn-icon btn-flat btn-default"
-                                data-toggle="tooltip" data-original-title="Edit">
-                            <i class="icon md-wrench" aria-hidden="true"></i>
-                        </button>
-                        <button type="button" class="btn btn-sm btn-icon btn-flat btn-default"
-                                data-toggle="tooltip" data-original-title="Delete">
-                            <i class="icon md-close" aria-hidden="true"></i>
-                        </button>
-                    </span>
-                </td>
-            </tr>
-            </tbody>
-            <tbody>
-
-            <tr>
-                {{--<td></td>--}}
-                <td colspan="4">
-                    <table class="table table-responsive table-bordered">
-                        <thead>
-                        <tr>
-                            <th>Category</th>
-                            <th>Area</th>
-                            <th>Prices</th>
-                            <th>Max People</th>
-                            <th>Address</th>
-                            <th>Featured</th>
-                            <th>Description</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>{{ $space->category_id }}</td>
-                            <td>{{ $space->area }}</td>
-                            <td>
-                                <div data-toggle="tooltip"
-                                     data-original-title="Hourly / Daily / Monthly">
-                                    ${{ $space->hourly_price }} -
-                                    ${{ $space->daily_price }} -
-                                    ${{ $space->monthly_price }}
-                                </div>
-                            </td>
-                            <td>{{ $space->max_number_of_people }}</td>
-                            <td>{{ $space->address }}</td>
-                            <td>
-                                @if($space->is_featured)
-                                    <span class="label label-success">YES</span>
-                                @else(!$space->is_featured)
-                                    <span class="label label-danger">NO</span>
-                                @endif
-                                @if($space->status == -1)
-                                    <span class="label label-danger">not active</span>
-                                @endif
-                            </td>
-                            <td>{{ str_limit($space->description) }}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-            </tbody>
-        @endforeach
-
-    </table>
-    <div class="pull-right">{!! $spaces->links() !!}</div>
-    <!-- End Example Table-section -->
-@endif
+</table>
+<div class="pull-right">{!! $spaces->links() !!}</div>
+<!-- End Example Table-section -->
+@endcan
 
 @endsection
 
 @push('footer')
-    <script src="{{config('cache.static_files_root')}}/global/js/plugins/selectable.js"></script>
-    <script src="{{config('cache.static_files_root')}}/global/js/components/selectable.js"></script>
-    <script src="{{config('cache.static_files_root')}}/global/js/components/table.js"></script>
+<script src="{{config('cache.static_files_root')}}/global/js/plugins/selectable.js"></script>
+<script src="{{config('cache.static_files_root')}}/global/js/components/selectable.js"></script>
+<script src="{{config('cache.static_files_root')}}/global/js/components/table.js"></script>
 @endpush

@@ -2,12 +2,12 @@
     <div class="site-menubar-body">
         <div>
             <div>
-                @if(auth()->user()->role == \App\Models\User::ROLE_ADMIN)
+                @can("admin")
                     <ul class="site-menu">
                         <li class="site-menu-item @if(route('dashboard.index')  == request()->url()) active @endif">
                             <a class="animsition-link" href="{{ route('dashboard.index') }}">
                                 <i class="site-menu-icon md-account" aria-hidden="true"></i>
-                                <span class="site-menu-title">Hi {{ auth()->user()->username }}!</span>
+                                <span class="site-menu-title">Hi {{ $user->username }}!</span>
                             </a>
                         </li>
 
@@ -26,14 +26,14 @@
                             </a>
                         </li>
                     </ul>
-
-                @elseif(auth()->user()->role == \App\Models\User::ROLE_SUPER)
+                @endcan
+                @can("super")
                     <ul class="site-menu">
 
                         <li class="site-menu-item">
                             <a class="animsition-link" href="#">
                                 <i class="site-menu-icon md-account" aria-hidden="true"></i>
-                                <span class="site-menu-title">Hi {{ auth()->user()->username }}!</span>
+                                <span class="site-menu-title">Hi {{ $user->username }}!</span>
                             </a>
                         </li>
                         <li class="site-menu-category">General</li>
@@ -66,7 +66,35 @@
                                     <a class="animsition-link" href="{{ route('dashboard.categories.index') }}">
                                         <span class="site-menu-title">All Categories</span>
                                         <div class="site-menu-label">
-                                            <span class="label label-primary">{{ \App\Models\Category::count() }}</span>
+                                            <span class="label label-primary">{{ $categoriesCount }}</span>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="site-menu-item has-sub
+                        @if(route('dashboard.venues.index')  == request()->url()
+                        || route('dashboard.venues.create')  == request()->url())
+                                active open
+                            @endif
+                                ">
+                            <a href="javascript:void(0)">
+                                <i class="site-menu-icon md-case" aria-hidden="true"></i>
+                                <span class="site-menu-title">Venues</span>
+                                <span class="site-menu-arrow"></span>
+                            </a>
+                            <ul class="site-menu-sub">
+                                <li class="site-menu-item @if(route('dashboard.venues.create')  == request()->url()) active @endif">
+                                    <a class="animsition-link" href="{{ route('dashboard.venues.create') }}">
+                                        <span class="site-menu-title">Add new</span>
+                                    </a>
+                                </li>
+                                <li class="site-menu-item @if(route('dashboard.venues.index')  == request()->url()) active @endif">
+                                    <a class="animsition-link" href="{{ route('dashboard.venues.index') }}">
+                                        <span class="site-menu-title">Venues</span>
+                                        <div class="site-menu-label">
+                                            <span class="label label-primary">{{ $venuesCount }}</span>
                                         </div>
                                     </a>
                                 </li>
@@ -94,7 +122,7 @@
                                     <a class="animsition-link" href="{{ route('dashboard.spaces.index') }}">
                                         <span class="site-menu-title">Spaces</span>
                                         <div class="site-menu-label">
-                                            <span class="label label-primary">{{ \App\Models\Space::count() }}</span>
+                                            <span class="label label-primary">{{ $spacesCount }}</span>
                                         </div>
                                     </a>
                                 </li>
@@ -102,7 +130,7 @@
                                     <a class="animsition-link" href="{{ route('dashboard.categories.index') }}">
                                         <span class="site-menu-title">Categories</span>
                                         <div class="site-menu-label">
-                                            <span class="label label-default">{{ \App\Models\Category::count() }}</span>
+                                            <span class="label label-default">{{ $categoriesCount }}</span>
                                         </div>
                                     </a>
                                 </li>
@@ -110,7 +138,7 @@
                                     <a class="animsition-link" href="#">
                                         <span class="site-menu-title">Amenities</span>
                                         <div class="site-menu-label">
-                                            <span class="label label-default">{{ \App\Models\Tag::where('type','amenity')->count() }}</span>
+                                            <span class="label label-default">{{ $amenitiesCount }}</span>
                                         </div>
                                     </a>
                                 </li>
@@ -128,6 +156,9 @@
                                 <li class="site-menu-item">
                                     <a href="{{ route('dashboard.users') }}">
                                         <span class="site-menu-title">All Users</span>
+                                        <div class="site-menu-label">
+                                            <span class="label label-default">{{ $usersCount }}</span>
+                                        </div>
                                     </a>
                                 </li>
 
@@ -144,7 +175,7 @@
                             <div class="progress-bar active" style="width: 30%;" role="progressbar"></div>
                         </div>
                     </div>
-                @endif
+                @endcan
             </div>
         </div>
     </div>

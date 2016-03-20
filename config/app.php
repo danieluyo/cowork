@@ -155,6 +155,7 @@ return [
 		App\Providers\AuthServiceProvider::class,
 		App\Providers\EventServiceProvider::class,
 		App\Providers\RouteServiceProvider::class,
+		App\Providers\ViewComposerServiceProvider::class,
 
 		Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
 		Dimsav\Translatable\TranslatableServiceProvider::class,
