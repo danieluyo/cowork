@@ -31,8 +31,8 @@ class CreateUsersTable extends Migration {
 			$table->string( 'website' )->nullable();
 			$table->string( 'photo' )->nullable();
 			$table->string( 'facebook' )->nullable();
-			$table->json( 'settings' );
-			$table->json( 'payment' );
+			$table->string( 'settings' );
+			$table->string( 'payment' );
 			$table->unsignedInteger( 'followers' )->default( '0' );
 			$table->unsignedInteger( 'followings' )->default( '0' );
 			$table->boolean( 'status' )->default( '0' );
