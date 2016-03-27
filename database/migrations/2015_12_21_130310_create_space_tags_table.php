@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateSpaceTagsTable extends Migration
 {
@@ -12,7 +12,7 @@ class CreateSpaceTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('space_tag', function (Blueprint $table) {
+        Schema::create('space_tags', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('space_id')->index();
             $table->unsignedInteger('tag_id')->index();
@@ -30,6 +30,6 @@ class CreateSpaceTagsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('space_tag');
+        Schema::drop('space_tags');
     }
 }
