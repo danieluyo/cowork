@@ -11,7 +11,6 @@ _ide_helper.php
 /node_modules
 Homestead.yaml
 Homestead.json
-.env
 
 /public/img/uploads/
 
@@ -38,7 +37,7 @@ crashlytics-build.properties
 
 
 ### Composer ###
-vendor/
+/vendor/
 composer.phar
 
 
