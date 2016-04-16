@@ -19,7 +19,8 @@
                         <h3 class="widget-title margin-bottom-20">
                             Begin here
                         </h3>
-                        <button type="button" class="btn btn-success waves-effect waves-light">Add venue</button>
+                        <a href="{{ action('Space\SpaceController@create') }}"
+                           class="btn btn-success waves-effect waves-light">Add Space</a>
                     </div>
                 </div>
             </div>
