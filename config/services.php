@@ -36,11 +36,15 @@ return [
 	],
 
 	'facebook' => [
-		'url' => 'https://facebook.com/optimatec1',
+		'url' => 'https://www.facebook.com/coworkfind',
 	],
 
 	'twitter' => [
-		'url' => 'https://facebook.com/optimatec1',
+		'url' => 'https://www.twitter.com/coworkfind/',
+	],
+
+	'google' => [
+		'maps_api_key' => env('GOOGLE_MAPS_API_KEY'),
 	],
 
 	'uploads' => [

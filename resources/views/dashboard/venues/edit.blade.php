@@ -205,7 +205,7 @@
 <script src="{{config('cache.static_files_root')}}/global/vendor/bootstrap-select/bootstrap-select.js"></script>
 <script src="{{config('cache.static_files_root')}}/global/js/components/bootstrap-select.js"></script>
 <script src="{{config('cache.static_files_root')}}/assets/js/intlTelInput.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initAutocomplete" async defer>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ config('services.google.maps_api_key')  }}&libraries=places&callback=initAutocomplete" async defer>
 </script>
 <script src="{{config('cache.static_files_root')}}/assets/js/googleMaps.js"></script>
 
